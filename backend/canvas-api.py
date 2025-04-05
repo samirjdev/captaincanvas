@@ -1,8 +1,12 @@
 import requests
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # load from .env file
 
 # Replace these with your Canvas API details
 API_URL = "https://usflearn.instructure.com/api/v1"
-API_TOKEN = "13~K4rG8W44ear3nBVz787uAkrQGfFFDc9XrAEAUu3Gmx2ERNxeNQGX4Hz4tBFaC6UV"
+API_TOKEN = os.getenv("CANVAS_API")
 
 def get_favorited_courses():
     """
