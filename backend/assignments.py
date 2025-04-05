@@ -1,0 +1,1 @@
+# Collecting data on every assignment (based on the favorited courses that have assignments)
