@@ -41,7 +41,7 @@ def generate_weekly_schedule(api_key):
         "If there are more assignments than days in the week, you can assign multiple assignments to the same day. "
         "Ensure the assignments are added in the proper order based on their due dates or logical progression. "
         "Do not include assignments that are empty or missing descriptions. "
-        "For each assignment, provide the day it should be worked on, its difficulty score, and its due date. "
+        "For each assignment, provide the day it should be worked on, its difficulty score 1 through 5, and its due date. "
         "Provide the results in JSON format, with the course IDs as keys. Each course should include the course name and a list of assignments, "
         "where each assignment has its name, difficulty score, due date, and assigned day.\n\n"
         "PLEASE DO NOT RETURN ASSIGNMENTS THAT ARE EMPTY OR EMPTY LIST."

@@ -105,7 +105,10 @@ button {
 
 /* Error message styling */
 .error-message {
-    color: #d32f2f; /* Red color for error */
-    font-size: 0.9rem;
-    margin-top: 10px;
+    color: white; /* Red color for error */
+    font-size: 12px;
+    padding-top: 10px; /* Add spacing above the error message */
+    text-align: center; /* Center-align the error message */
+    width: 100%; /* Ensure the error message takes up the full width */
+    display: block; /* Force the error message onto a new line */
   }

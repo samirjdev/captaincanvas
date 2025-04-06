@@ -1,28 +1,26 @@
-<div class="landing-container" style="background-image: url('/public/background.png'); background-size: cover; background-position: center;">
-  <img src="/largelogo.png" alt="Captain Canvas Logo" class="logo">
+<img src="/largelogo.png" alt="Captain Canvas Logo" class="logo">
 
-  <!-- Show spinner when loading -->
-  <div *ngIf="isLoading" class="spinner-overlay">
-    <mat-spinner color="primary"></mat-spinner>
-  </div>
+<!-- Show spinner when loading -->
+<div *ngIf="isLoading" class="spinner-overlay">
+  <mat-spinner color="primary"></mat-spinner>
+</div>
 
-  <div class="form-container" [class.disabled]="isLoading">
-    <mat-form-field appearance="outline" class="token-input">
-      <mat-label>Enter API Token</mat-label>
-      <input matInput [(ngModel)]="apiToken" [disabled]="isLoading" />
-    </mat-form-field>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="makeApiRequest()"
-      [disabled]="!apiToken || apiToken.trim() === '' || isLoading"
-    >
-      Create!
-    </button>
+<div class="form-container" [class.disabled]="isLoading">
+  <mat-form-field appearance="outline" class="token-input">
+    <mat-label>Enter API Token</mat-label>
+    <input matInput [(ngModel)]="apiToken" [disabled]="isLoading" />
+  </mat-form-field>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="makeApiRequest()"
+    [disabled]="!apiToken || apiToken.trim() === '' || isLoading"
+  >
+    Create!
+  </button>
+</div>
 
-    <!-- Display error message if it exists -->
-    <div *ngIf="errorMessage" class="error-message">
-      {{ errorMessage }}
-    </div>
-  </div>
+<!-- Move error message below the input and button -->
+<div *ngIf="errorMessage" class="error-message">
+  {{ errorMessage }}
 </div>
