@@ -7,12 +7,13 @@ import json  # Import JSON module to write data to a file
 
 # Load the API token from .env file
 load_dotenv()
-API_TOKEN = os.getenv("CANVAS_API")
+
 BASE_URL = "https://usflearn.instructure.com/api/v1"
 WEB_BASE_URL = "https://usflearn.instructure.com"
 
-HEADERS = {
-    "Authorization": f"Bearer {API_TOKEN}"
+api_token = None
+headers = {
+    None
 }
 
 class Assignment:
@@ -64,7 +65,7 @@ def fetch_all_pages(url):
     """Fetch all pages of results from a paginated Canvas API endpoint."""
     results = []
     while url:
-        response = requests.get(url, headers=HEADERS)
+        response = requests.get(url, headers=headers)
         response.raise_for_status()
         results.extend(response.json())
 
@@ -115,7 +116,15 @@ def extract_description(assignment, course_id):
         "course_link": course_link
     }
 
-def main():
+def retrieve_canvas_data(api_key):
+    global api_token
+    api_token = api_key
+    
+    global headers
+    headers = {
+        "Authorization": f"Bearer {api_token}"
+    }
+    
     # Get today's date
     today = date.today()
 
@@ -168,6 +177,3 @@ def main():
         json.dump(courses_data, json_file, indent=4)
 
     print("Data has been written to 'courses_data.json'")
-
-if __name__ == "__main__":
-    main()
