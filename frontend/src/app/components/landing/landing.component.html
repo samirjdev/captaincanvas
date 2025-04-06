@@ -1,12 +1,11 @@
-<div class="landing-container">
-  <h1 class="title">Canvas Time Tracker</h1>
-
+<div class="landing-container" style="background-image: url('/assets/background.png'); background-size: cover; background-position: center;">
+  <img src="/largelogo.png" alt="Captain Canvas Logo" class="logo">
+  
   <div class="form-container">
     <mat-form-field appearance="outline" class="token-input">
-      <mat-label>Enter your API Token</mat-label>
-      <input matInput [(ngModel)]="apiToken" placeholder="API Token" />
+      <mat-label>Enter API Token</mat-label>
+      <input matInput [(ngModel)]="apiToken" />
     </mat-form-field>
-    
     <button mat-raised-button color="primary" (click)="makeApiRequest()">Submit</button>
   </div>
 </div>

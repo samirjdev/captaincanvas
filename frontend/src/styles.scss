@@ -7,11 +7,14 @@
     font-family: 'Roboto', 'Helvetica Neue', sans-serif;
     background: linear-gradient(135deg, #56db68, #e64c22, #cb44a5, #dfd61f); /* Vibrant gradient colors */
     background-size: 400% 400%; /* Make the gradient larger than the viewport */
-    animation: gradientMix 20s ease infinite; /* Animate the gradient */
+    animation: gradientMix 20s ease infinite, backgroundPan 60s linear infinite; /* Animate the gradient and background pan */
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url('/background.png');
+    background-size: cover;
+    background-position: center;
   }
   
   #app-root {
@@ -23,21 +26,18 @@
     border-radius: 8px; /* Optional: Add rounded corners for a modern look */
   }
   
-  /* Keyframes for the gradient animation */
-  @keyframes gradientMix {
-    0% {
-      background-position: 0% 0%;
-    }
-    25% {
-      background-position: 50% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    75% {
-      background-position: 50% 100%;
-    }
-    100% {
-      background-position: 0% 0%;
-    }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@keyframes backgroundPan {
+  0% {
+    background-position: left center;
   }
+  50% {
+    background-position: right center;
+  }
+  100% {
+    background-position: left center;
+  }
+}

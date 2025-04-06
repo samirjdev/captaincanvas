@@ -5,16 +5,42 @@
     justify-content: center;
     height: 100vh;
     text-align: center;
-  }
-  
-  .title {
+    background-color: transparent; // Ensure background image is visible
+    background-image: url('/background.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.title {
     font-size: 2.5rem;
     margin-bottom: 2rem;
-  }
-  
-  .token-input {
-    width: 300px;
-    margin-bottom: 1rem;
-  }
+}
 
-  
+.logo {
+    width: 400px; // Increased size further
+    margin-bottom: 5rem; // Maintain spacing
+    filter: invert(1); // Invert colors
+    opacity: 0.9; /* Make the logo semi-transparent */
+}
+
+.form-container {
+    display: flex; // Align form and button horizontally
+    align-items: center; // Center items vertically
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+    padding: 2rem 2rem 0 2rem; // Remove bottom padding
+    border-radius: 8px; // Optional: Add rounded corners
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Optional: Add a subtle shadow
+    gap: 2rem; // Increase spacing between form and button
+}
+
+.token-input {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 1rem;
+}
+
+button {
+    width: auto; // Adjust width to fit content
+    margin-top: -33.3px; // Fine-tune vertical alignment
+}
+
