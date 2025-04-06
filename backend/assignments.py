@@ -9,6 +9,7 @@ import json  # Import JSON module to write data to a file
 load_dotenv()
 API_TOKEN = os.getenv("CANVAS_API")
 BASE_URL = "https://usflearn.instructure.com/api/v1"
+WEB_BASE_URL = "https://usflearn.instructure.com"
 
 HEADERS = {
     "Authorization": f"Bearer {API_TOKEN}"
@@ -16,17 +17,20 @@ HEADERS = {
 
 class Assignment:
     """Class to represent an assignment."""
-    def __init__(self, name, due_date, description):
+    def __init__(self, name, due_date, description, course_id, assignment_id):
         self.name = name
         self.due_date = due_date
         self.description = description
+        self.course_id = course_id
+        self.assignment_id = assignment_id
 
     def to_dict(self):
         """Convert the assignment to a dictionary."""
         return {
             "name": self.name,
             "due_date": self.due_date,
-            "description": self.description
+            "description": self.description,
+            "assignment_link": get_assignment_link(self.course_id, self.assignment_id)
         }
 
 class Course:
@@ -44,8 +48,17 @@ class Course:
         """Convert the course to a dictionary."""
         return {
             "name": self.name,
+            "link": get_course_link(self.course_id),
             "assignments": [assignment.to_dict() for assignment in self.assignments]
         }
+
+def get_assignment_link(course_id, assignment_id):
+    """Construct the web link to a specific assignment."""
+    return f"{WEB_BASE_URL}/courses/{course_id}/assignments/{assignment_id}"
+
+def get_course_link(course_id):
+    """Construct the web link to a specific course."""
+    return f"{WEB_BASE_URL}/courses/{course_id}"
 
 def fetch_all_pages(url):
     """Fetch all pages of results from a paginated Canvas API endpoint."""
@@ -86,10 +99,21 @@ def clean_html(html_content):
     # Remove excessive new lines and extra spaces
     return "\n".join(line.strip() for line in text.splitlines() if line.strip())
 
-def extract_description(assignment):
-    """Extract and clean the description for an assignment."""
+def extract_description(assignment, course_id):
+    """Extract and clean the description for an assignment, and include links."""
     description_html = assignment.get("description", "")
-    return clean_html(description_html)
+    description = clean_html(description_html)
+
+    # Add links to the assignment and course
+    assignment_id = assignment.get("id")
+    assignment_link = get_assignment_link(course_id, assignment_id)
+    course_link = get_course_link(course_id)
+
+    return {
+        "description": description,
+        "assignment_link": assignment_link,
+        "course_link": course_link
+    }
 
 def main():
     # Get today's date
@@ -121,8 +145,18 @@ def main():
             if due_date:  # Only process assignments with a due date
                 due_date = datetime.strptime(due_date, "%Y-%m-%dT%H:%M:%SZ").date()
                 if due_date >= today:  # Only include assignments due today or in the future
-                    description = extract_description(assignment)
-                    assignment_obj = Assignment(assignment["name"], str(due_date), description)
+                    description_data = extract_description(assignment, course_id)
+                    assignment_obj = Assignment(
+                        name=assignment["name"],
+                        due_date=str(due_date),
+                        description=description_data["description"],
+                        course_id=course_id,
+                        assignment_id=assignment["id"]
+                    )
+                    # Add links to the assignment
+                    assignment_obj.assignment_link = get_assignment_link(course_id, assignment["id"])
+                    assignment_obj.course_link = get_course_link(course_id)
+
                     course_obj.add_assignment(assignment_obj)
 
         # Only add the course to the dictionary if it has assignments
@@ -133,7 +167,7 @@ def main():
     with open("courses_data.json", "w") as json_file:
         json.dump(courses_data, json_file, indent=4)
 
-    print("Data has been written to courses_data.json")
+    print("Data has been written to 'courses_data.json'")
 
 if __name__ == "__main__":
     main()

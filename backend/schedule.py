@@ -67,6 +67,32 @@ try:
         json.dump(result_json, output_file, indent=4)  # Write the JSON with indentation for readability
 
     print("The weekly schedule has been written to 'weekly_schedule.json'.")
+
+    # Load the course data JSON file
+    with open("courses_data.json", "r") as course_data_file:
+        course_data = json.load(course_data_file)
+
+    # Update the JSON with links from the course data
+    for course_id, course_info in result_json.items():
+        # Add the course link if it exists in the course data
+        if course_id in course_data:
+            course_info["link"] = course_data[course_id].get("link", "")
+
+            # Iterate through all assignments and match by name
+            for assignment in course_info.get("assignments", []):
+                # Match assignments by name and add the link
+                for original_assignment in course_data[course_id].get("assignments", []):
+                    # Use a case-insensitive comparison and strip extra spaces
+                    if assignment["name"].strip().lower() == original_assignment["name"].strip().lower():
+                        assignment["assignment_link"] = original_assignment.get("assignment_link", "")
+                        break  # Exit the loop once a match is found
+
+    # Write the updated JSON to a new file
+    with open("weekly_schedule.json", "w") as updated_output_file:
+        json.dump(result_json, updated_output_file, indent=4)
+
+    print("The updated weekly schedule with links has been written to 'weekly_schedule.json'.")
+
 except json.JSONDecodeError as e:
     print("Failed to parse JSON from ChatGPT response:", e)
     print("Raw response text:", response_text)
