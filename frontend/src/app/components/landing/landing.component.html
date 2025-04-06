@@ -1,0 +1,12 @@
+<div class="landing-container">
+  <h1 class="title">Canvas Time Tracker</h1>
+
+  <div class="form-container">
+    <mat-form-field appearance="outline" class="token-input">
+      <mat-label>Enter your API Token</mat-label>
+      <input matInput [(ngModel)]="apiToken" placeholder="API Token" />
+    </mat-form-field>
+    
+    <button mat-raised-button color="primary" (click)="makeApiRequest()">Submit</button>
+  </div>
+</div>

@@ -1,9 +1,11 @@
 from flask import Flask, jsonify, request, render_template_string
+from flask_cors import CORS
 import schedule
 import json
 import os
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 # Load the weekly schedule JSON file
 def load_weekly_schedule(api_key):

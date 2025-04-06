@@ -1,0 +1,43 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+  
+  body {
+    margin: 0;
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    background: linear-gradient(135deg, #56db68, #e64c22, #cb44a5, #dfd61f); /* Vibrant gradient colors */
+    background-size: 400% 400%; /* Make the gradient larger than the viewport */
+    animation: gradientMix 20s ease infinite; /* Animate the gradient */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #app-root {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    background-color: transparent; /* Make the app container background transparent */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow for depth */
+    border-radius: 8px; /* Optional: Add rounded corners for a modern look */
+  }
+  
+  /* Keyframes for the gradient animation */
+  @keyframes gradientMix {
+    0% {
+      background-position: 0% 0%;
+    }
+    25% {
+      background-position: 50% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    75% {
+      background-position: 50% 100%;
+    }
+    100% {
+      background-position: 0% 0%;
+    }
+  }

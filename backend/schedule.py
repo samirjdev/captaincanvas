@@ -97,3 +97,44 @@ def generate_weekly_schedule(api_key):
     except json.JSONDecodeError as e:
         print("Failed to parse JSON from ChatGPT response:", e)
         print("Raw response text:", response_text)
+
+
+    # Load the original JSON file
+    with open("weekly_schedule.json", "r") as file:
+        data = json.load(file)
+
+    # Create a new structure for the reordered JSON
+    reordered_data = []
+
+    # Iterate through the courses and assignments
+    for course_id, course_info in data.items():
+        course_name = course_info["course_name"]
+        course_link = course_info["link"]
+        assignments = course_info["assignments"]
+
+        for assignment in assignments:
+            assigned_day = assignment["assigned_day"]
+
+            # Ensure the list has enough indices for the assigned day
+            while len(reordered_data) <= assigned_day:
+                reordered_data.append([])
+
+            # Add the assignment info to the corresponding day
+            reordered_data[assigned_day].append({
+                "course_name": course_name,
+                "course_link": course_link,
+                "assignment": {
+                    "name": assignment["name"],
+                    "difficulty_score": assignment["difficulty_score"],
+                    "due_date": assignment["due_date"],
+                    "assignment_link": assignment["assignment_link"]
+                }
+            })
+
+    # Save the reordered JSON to a new file
+    with open("weekly_schedule.json", "w") as file:
+        json.dump(reordered_data, file, indent=4)
+
+    print("Reordered JSON has been saved to 'weekly_schedule.json'.")
+
+# generate_weekly_schedule(os.getenv("CANVAS_API_KEY"))

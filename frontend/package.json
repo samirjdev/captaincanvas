@@ -1,5 +1,5 @@
 {
-  "name": "captain-canvas",
+  "name": "frontend",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,10 +7,11 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:captain-canvas": "node dist/captain-canvas/server/server.mjs"
+    "serve:ssr:frontend": "node dist/frontend/server/server.mjs"
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^19.2.5",
     "@angular/cdk": "^19.2.8",
     "@angular/common": "^19.2.0",
     "@angular/compiler": "^19.2.0",
@@ -23,7 +24,6 @@
     "@angular/router": "^19.2.0",
     "@angular/ssr": "^19.2.6",
     "express": "^4.18.2",
-    "ngx-spinner": "^19.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

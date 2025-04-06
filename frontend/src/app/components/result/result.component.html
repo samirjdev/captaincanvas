@@ -1,0 +1,45 @@
+<div class="result-container">
+  <h1>Weekly Schedule</h1>
+
+  <!-- Loop through each day -->
+  <div *ngFor="let day of scheduleData; let dayIndex = index" class="day">
+    <mat-card class="day-card">
+      <mat-card-header>
+        <mat-card-title>Day {{ dayIndex + 1 }}</mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+
+      <!-- Check if the day has any assignments -->
+      <div *ngIf="day.length > 0; else noAssignments">
+        <mat-list>
+          <mat-list-item *ngFor="let entry of day">
+            <div class="list-item-content">
+              <!-- Left side: Course name and assignments -->
+              <div class="course-info">
+                <h3>
+                  <a [href]="entry.course_link" target="_blank">
+                    {{ entry.course_name }}
+                  </a>
+                </h3>
+                <a [href]="entry.assignment.assignment_link" target="_blank">
+                  {{ entry.assignment.name }}
+                </a>
+              </div>
+
+              <!-- Right side: Due date and difficulty -->
+              <div class="assignment-details">
+                <span>Due: {{ entry.assignment.due_date }}</span>
+                <span class="difficulty">Difficulty: {{ entry.assignment.difficulty_score }}/5</span>
+              </div>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </div>
+
+      <!-- Fallback if no assignments are available for the day -->
+      <ng-template #noAssignments>
+        <p>No assignments for this day.</p>
+      </ng-template>
+    </mat-card>
+  </div>
+</div>

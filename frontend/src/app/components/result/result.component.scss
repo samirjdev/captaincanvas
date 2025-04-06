@@ -1,0 +1,63 @@
+.result-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #333;
+}
+
+.day-card {
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.list-item-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.course-info {
+  flex: 1;
+}
+
+.course-info h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #007bff;
+}
+
+.course-info h3:hover {
+  text-decoration: underline;
+}
+
+.course-info a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.course-info a:hover {
+  text-decoration: underline;
+}
+
+.assignment-details {
+  text-align: right;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.assignment-details span {
+  display: block;
+}
+
+.assignment-details .difficulty {
+  color: #ff9800;
+  font-weight: bold;
+}
