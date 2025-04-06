@@ -22,8 +22,7 @@ Activate it like this
 Make sure your virtual environment is activated, then run:
 
 ```bash
-pip install requests
-pip install python-dotenv
+pip install requests beautifulsoup4 python-docx PyPDF2 python-dotenv
 ```
 
 # 🔐 Step 3: Create Your .env File
