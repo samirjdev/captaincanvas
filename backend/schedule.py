@@ -1,8 +1,8 @@
 
 from openai import OpenAI
 from dotenv import load_dotenv
-import json
 import os
+import json
 
 # Set your OpenAI API key
 client = OpenAI()
@@ -40,7 +40,7 @@ prompt = (
     "For each assignment, provide the day it should be worked on, its difficulty score, and its due date. "
     "Provide the results in JSON format, with the course IDs as keys. Each course should include the course name and a list of assignments, "
     "where each assignment has its name, difficulty score, due date, and assigned day.\n\n"
-    "PLEASE DO NOT OUTPUT ANYTHING ELSE EXCEPT FOR THE JSON OUTPUT\n\n"
+    "PLEASE DO NOT OUTPUT ANYTHING ELSE EXCEPT FOR THE JSON OUTPUT, DO NOT PUT IN A MARKDOWN CELL, DO NOT ADD NEW LINES, JUST RAW CLEAN JSON THAT CAN BE JSONIFIED\n\n"
     + "\n\n".join(course_descriptions)
 )
 
@@ -49,4 +49,24 @@ response = client.responses.create(
     input=prompt
 )
 
+
+
 print(response.output_text)
+
+import json
+
+# Assuming `response.output_text` contains the pure JSON string
+response_text = response.output_text
+
+# Parse the JSON content
+try:
+    result_json = json.loads(response_text)  # Convert the JSON string to a Python dictionary
+
+    # Write the parsed JSON to a new file
+    with open("weekly_schedule.json", "w") as output_file:
+        json.dump(result_json, output_file, indent=4)  # Write the JSON with indentation for readability
+
+    print("The weekly schedule has been written to 'weekly_schedule.json'.")
+except json.JSONDecodeError as e:
+    print("Failed to parse JSON from ChatGPT response:", e)
+    print("Raw response text:", response_text)

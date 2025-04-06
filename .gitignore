@@ -1,3 +1,4 @@
 venv
 .env
 courses_data.json
+weekly_schedule.json
