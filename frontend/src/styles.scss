@@ -12,7 +12,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('/background.png');
+    background-image: url('../public/background.png');
     background-size: cover;
     background-position: center;
   }
@@ -26,8 +26,10 @@
     border-radius: 8px; /* Optional: Add rounded corners for a modern look */
   }
   
+  ::-webkit-scrollbar {
+    display: none;
+}
 
-html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @keyframes backgroundPan {

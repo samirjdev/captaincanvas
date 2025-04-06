@@ -1,46 +1,111 @@
 .landing-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    text-align: center;
-    background-color: transparent; // Ensure background image is visible
-    background-image: url('/background.png');
-    background-size: cover;
-    background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  background-color: transparent; // Ensure background image is visible
+  background-image: url("/background.png");
+  background-size: cover;
+  background-position: center;
 }
 
 .title {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .logo {
-    width: 400px; // Increased size further
-    margin-bottom: 5rem; // Maintain spacing
-    filter: invert(1); // Invert colors
-    opacity: 0.9; /* Make the logo semi-transparent */
+  width: 400px; // Increased size further
+  margin-bottom: 5rem; // Maintain spacing
+  filter: invert(1); // Invert colors
+  opacity: 0.9; /* Make the logo semi-transparent */
 }
 
 .form-container {
-    display: flex; // Align form and button horizontally
-    align-items: center; // Center items vertically
-    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
-    padding: 2rem 2rem 0 2rem; // Remove bottom padding
-    border-radius: 8px; // Optional: Add rounded corners
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Optional: Add a subtle shadow
-    gap: 2rem; // Increase spacing between form and button
+  display: flex; // Align form and button horizontally
+  align-items: center; // Center items vertically
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* Semi-transparent white background */
+  padding: 2rem 2rem 0 2rem; // Remove bottom padding
+  border-radius: 8px; // Optional: Add rounded corners
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Optional: Add a subtle shadow
+  gap: 2rem; // Increase spacing between form and button
 }
 
 .token-input {
-    width: 100%;
-    max-width: 400px;
-    margin-bottom: 1rem;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 1rem;
 }
 
 button {
-    width: auto; // Adjust width to fit content
-    margin-top: -33.3px; // Fine-tune vertical alignment
+  width: auto; // Adjust width to fit content
+  margin-top: -33.3px; // Fine-tune vertical alignment
 }
 
+/* Disable form inputs and button when loading */
+.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Spinner overlay styling */
+.spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.683);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  /* Add animation */
+  animation: pulsate 3s infinite;
+}
+
+/* Spinner overlay styling */
+.spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.683);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  /* Add animation */
+  animation: smooth-pulsate 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Keyframes for smooth pulsating background */
+@keyframes smooth-pulsate {
+  0% {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    background-color: rgba(99, 15, 15, 0.8);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+
+/* Error message styling */
+.error-message {
+    color: #d32f2f; /* Red color for error */
+    font-size: 0.9rem;
+    margin-top: 10px;
+  }
