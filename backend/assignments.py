@@ -78,11 +78,13 @@ def get_assignments_for_course(course_id):
     return fetch_all_pages(url)
 
 def clean_html(html_content):
-    """Extract plain text from HTML content."""
+    """Extract plain text from HTML content and remove excessive new lines."""
     if not html_content:  # Handle None or empty content
         return ""
     soup = BeautifulSoup(html_content, "html.parser")
-    return soup.get_text(separator="\n").strip()
+    text = soup.get_text(separator="\n").strip()
+    # Remove excessive new lines and extra spaces
+    return "\n".join(line.strip() for line in text.splitlines() if line.strip())
 
 def extract_description(assignment):
     """Extract and clean the description for an assignment."""
